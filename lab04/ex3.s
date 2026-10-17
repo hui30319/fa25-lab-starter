@@ -37,6 +37,10 @@ ex3:
     beq a1 x0 ex3_zero_case
 
     # otherwise, return ex3(a0, a1-1) * a0
+    addi sp sp -8
+    sw t0 0(sp)
+    sw ra 4(sp)
+
     mv t0 a0      # save a0 in t0
     addi a1 a1 -1 # decrement a1
 
@@ -44,6 +48,10 @@ ex3:
 
     mul a0 a0 t0  # multiply ex3(a0, a1-1) by t0
                   # (which contains the value of a0)
+
+    lw ra 4(sp)
+    lw t0 0(sp)
+    addi sp sp 8
 
     j ex3_end
 
